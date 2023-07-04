@@ -1,0 +1,57 @@
+services:
+  js-scripts-env-01:
+        image: js-scripts-env:latest
+        build: ./docker
+        container_name: js-scripts-env-01
+        restart: always
+        tty: true
+        volumes:
+            - ./logs:/scripts/logs/01
+        environment:
+            - JD_COOKIE=pt_pin=xxxx;pt_key=xxxxx;
+            - PETSHARECODES=MTEyNDI1MTYxMDAwMDAwMDQ4MDMzOTk5&MTEyNjE4NjQ2MDAwMDAwMDQ5NDExNTMz&MTE1NDY3NTIwMDAwMDAwNTAxMzg3ODk=&MTE0MjI0NTE1MjAwMDAwMDA0NzU3MzQ5MQ==
+            - PLANT_BEAN_SHARECODES=b7bzvqxx4v2earew5qfl7cug7zi7cbr2gdbwfbi&wrqpt6mmzjh2yghsuutaukx7cvx3tiwq7l7l5ia&e7lhibzb3zek2oumjdvbgaujnlcbayxlcjgazxy&olmijoxgmjutyyvrn72npfvrcezsfpzrfj24lka
+            - TG_BOT_TOKEN=
+            - TG_USER_ID=
+  js-scripts-env-02:
+        image: js-scripts-env:latest
+        build: ./docker
+        container_name: js-scripts-env-02
+        restart: always
+        tty: true
+        volumes:
+            - ./logs:/scripts/logs/02
+        environment:
+            - JD_COOKIE=pt_pin=xxxx;pt_key=xxxxx;
+            - PETSHARECODES=MTEyNDI1MTYxMDAwMDAwMDQ4MDMzOTk5&MTEyNjE4NjQ2MDAwMDAwMDQ5NDExNTMz&MTE1NDY3NTIwMDAwMDAwNTAxMzg3ODk=&MTE0MjI0NTE1MjAwMDAwMDA0NzU3MzQ5MQ==
+            - PLANT_BEAN_SHARECODES=b7bzvqxx4v2earew5qfl7cug7zi7cbr2gdbwfbi&wrqpt6mmzjh2yghsuutaukx7cvx3tiwq7l7l5ia&e7lhibzb3zek2oumjdvbgaujnlcbayxlcjgazxy&olmijoxgmjutyyvrn72npfvrcezsfpzrfj24lka
+            - TG_BOT_TOKEN=
+            - TG_USER_ID=
+  js-scripts-env-03:
+        image: js-scripts-env:latest
+        build: ./docker
+        container_name: js-scripts-env-03
+        restart: always
+        tty: true
+        volumes:
+            - ./logs:/scripts/logs/03
+        environment:
+             - JD_COOKIE=pt_pin=xxxx;pt_key=xxxxx;
+             - PETSHARECODES=MTEyNDI1MTYxMDAwMDAwMDQ4MDMzOTk5&MTEyNjE4NjQ2MDAwMDAwMDQ5NDExNTMz&MTE1NDY3NTIwMDAwMDAwNTAxMzg3ODk=&MTE0MjI0NTE1MjAwMDAwMDA0NzU3MzQ5MQ==
+             - PLANT_BEAN_SHARECODES=b7bzvqxx4v2earew5qfl7cug7zi7cbr2gdbwfbi&wrqpt6mmzjh2yghsuutaukx7cvx3tiwq7l7l5ia&e7lhibzb3zek2oumjdvbgaujnlcbayxlcjgazxy&olmijoxgmjutyyvrn72npfvrcezsfpzrfj24lka
+             - TG_BOT_TOKEN=
+             - TG_USER_ID=
+  js-scripts-env-04:
+        image: js-scripts-env:latest
+        build: ./docker
+        container_name: js-scripts-env-04
+        restart: always
+        tty: true
+        volumes:
+            - ./logs:/scripts/logs/04
+        environment:
+            - JD_COOKIE=pt_pin=xxxx;pt_key=xxxxx;
+            - PETSHARECODES=MTEyNDI1MTYxMDAwMDAwMDQ4MDMzOTk5&MTEyNjE4NjQ2MDAwMDAwMDQ5NDExNTMz&MTE1NDY3NTIwMDAwMDAwNTAxMzg3ODk=&MTE0MjI0NTE1MjAwMDAwMDA0NzU3MzQ5MQ==
+            - PLANT_BEAN_SHARECODES=b7bzvqxx4v2earew5qfl7cug7zi7cbr2gdbwfbi&wrqpt6mmzjh2yghsuutaukx7cvx3tiwq7l7l5ia&e7lhibzb3zek2oumjdvbgaujnlcbayxlcjgazxy&olmijoxgmjutyyvrn72npfvrcezsfpzrfj24lka
+            - TG_BOT_TOKEN=
+            - TG_USER_ID=
