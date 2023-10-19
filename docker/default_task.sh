@@ -12,11 +12,11 @@ function initPythonEnv() {
   python3 setup.py install
 }
 
-echo "step 1) Start to set up python3 env and TG bot ##################################"
+echo "################################## step 1) Start to set up python3 and TG bot ##################################"
 if [ "$1" == "True" ]; then
   initPythonEnv
   if [ -z "$DISABLE_SPNODE" ]; then
-    echo "增加命令组合spnode ，使用该命令spnode jd_xxxx.js 执行js脚本会读取cookies.conf里面的jd cokie账号来执行脚本"
+    echo ">>>>>>>>>>>>>>>>>> spnode jd_xxxx.js will read the file cookies.conf"
     (
       cat <<EOF
 #!/bin/sh
@@ -46,38 +46,31 @@ EOF
     chmod +x /usr/local/bin/spnode
   fi
 
-  echo "spnode需要使用的到，cookie写入文件，该文件同时也为jd_bot扫码获自动取cookies服务"
+  echo ">>>>>>>>>>>>>>>>>> start to create the cookies.conf"
   if [ -z "$JD_COOKIE" ]; then
     if [ ! -f "$COOKIES_LIST" ]; then
       echo "" >"$COOKIES_LIST"
-      echo "未配置JD_COOKIE环境变量，$COOKIES_LIST文件已生成,请将cookies写入$COOKIES_LIST文件，格式每个Cookie一行"
     fi
   else
     if [ -f "$COOKIES_LIST" ]; then
-      echo "cookies.conf文件已经存在跳过,如果需要更新cookie请修改$COOKIES_LIST文件内容"
+      echo ">>>>>>>>>>>>>>>>>> cookies.conf is existing"
     else
-      echo "环境变量 cookies写入$COOKIES_LIST文件,如果需要更新cookie请修改cookies.conf文件内容"
       echo $JD_COOKIE | sed "s/[ &]/\\n/g" | sed "/^$/d" >$COOKIES_LIST
     fi
   fi
 
   CODE_GEN_CONF=/scripts/logs/code_gen_conf.list
-  echo "生成互助消息需要使用的到的 logs/code_gen_conf.list 文件，后续需要自己根据说明维护更新删除..."
   if [ ! -f "$CODE_GEN_CONF" ]; then
     touch CODE_GEN_CONF
   else
-    echo "logs/code_gen_conf.list 文件已经存在跳过初始化操作"
+    echo "logs/code_gen_conf.list is existing"
   fi
-  curl -sX POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d "chat_id=$TG_USER_ID&text=Congratulation🎉,tg bot set up succcessfully" >> /dev/null
+  curl -sX POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d "chat_id=$TG_USER_ID&text=Congratulation🎉,tg bot setup succcessfully" >> /dev/null
 fi
 
-echo "step 2) Start to set up cronjob  ##################################"
-defaultListFile="/scripts/docker/$DEFAULT_LIST_FILE"
-mergedListFile="/scripts/docker/merged_list_file.sh"
-cat $defaultListFile >$mergedListFile
-echo "Using default cronlist $DEFAULT_LIST_FILE ..."
 
-echo "step 3) Append docker_entrypoint.sh into crond ##################################"
+echo "################################## step 2) Start to set up crond  ##################################"
+mergedListFile="/scripts/docker/$DEFAULT_LIST_FILE"
 sed -ie '/'docker_entrypoint.sh'/d' ${mergedListFile}
 if [ $(date +%-H) -lt 12 ]; then
   random_h=$(($RANDOM % 12 + 12))
@@ -85,20 +78,17 @@ else
   random_h=$(($RANDOM % 12))
 fi
 random_m=$(($RANDOM % 60))
+
 echo -e "${random_m} ${random_h} * * * docker_entrypoint.sh >> /scripts/logs/default_task.log 2>&1" | tee -a $mergedListFile
-
-echo "step 4) Replace running time ##################################"
 sed -i "/\( ts\| |ts\|| ts\)/!s/>>/\|ts >>/g" $mergedListFile
-
-echo "step 5) Reload the latest cronjob list ##################################"
 if [[ -f /usr/bin/jd_bot && -z "$DISABLE_SPNODE" ]]; then
   sed -i "s/ node / spnode /g" $mergedListFile
 fi
 crontab $mergedListFile
 
-echo "step 6) Copy the docker_entrypoint.sh into container bin dir  ##################################"
+echo "################################## step 3) Copy the docker_entrypoint.sh into container bin dir  ##################################"
 cat /scripts/docker/docker_entrypoint.sh > /usr/local/bin/docker_entrypoint.sh
 
-echo "step 7) : install typescript"
+echo "################################## step 4) : install typescript"
 npm install -g typescript
 npm install -g ts-node
