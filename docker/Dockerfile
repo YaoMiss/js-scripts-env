@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.12
+FROM node:alpine3.12
 
 LABEL AUTHOR="none" \
       VERSION=1.0
@@ -9,7 +9,7 @@ ENV DEFAULT_LIST_FILE=crontab_list.sh \
     REPO_URL=https://gitlab.com/biyongyao/jd-scripts.git \
     JD_SCRIPT_REPO_URL=https://github.com/Toulu-debug/enen.git \
     REPO_BRANCH=master \
-    NPM_RESOURCE=https://registry.npm.taobao.org
+    NPM_RESOURCE=https://registry.npmjs.org
 
 RUN set -ex \
     && apk update \
