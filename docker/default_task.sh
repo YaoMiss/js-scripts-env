@@ -101,3 +101,4 @@ cat /scripts/docker/docker_entrypoint.sh > /usr/local/bin/docker_entrypoint.sh
 
 echo "step 7) : install typescript"
 npm install -g typescript
+npm install -g ts-node

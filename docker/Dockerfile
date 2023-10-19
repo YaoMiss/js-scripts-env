@@ -1,4 +1,4 @@
-FROM node:alpine3.12
+FROM node:alpine3.16
 
 LABEL AUTHOR="none" \
       VERSION=1.0
