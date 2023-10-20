@@ -1,0 +1,26 @@
+services:
+  js-scripts-01:
+        image: jd-scripts-env:latest
+        build: ./docker
+        container_name: js-scripts-01
+        restart: always
+        tty: true
+        volumes:
+            - ./logs:/scripts/logs/01
+        environment:
+            - JD_COOKIE=pt_pin=xxxx;pt_key=xxxx;
+            - TG_BOT_TOKEN=
+            - TG_USER_ID=
+
+  js-scripts-02:
+        image: jd-scripts-env:latest
+        build: ./docker
+        container_name: js-scripts-02
+        restart: always
+        tty: true
+        volumes:
+            - ./logs:/scripts/logs/02
+        environment:
+            - JD_COOKIE=pt_pin=xxxx;pt_key=xxxx;
+            - TG_BOT_TOKEN=
+            - TG_USER_ID=
